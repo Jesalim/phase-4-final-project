@@ -1,4 +1,3 @@
-
 require_relative "boot"
 
 require "rails"
@@ -19,14 +18,14 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Phase4FinalProject
+module FlightBookingBackend
   class Application < Rails::Application
 
-    #Adding cookies and sessions middleware
+    # Adding cookies and session middleware
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
 
-     # Use SameSite=Strict for all cookies to help protect against CSRF
+    # Use SameSite=Strict for all cookies to help protect against CSRF
     # https://owasp.org/www-community/SameSite
     config.action_dispatch.cookies_same_site_protection = :strict
 

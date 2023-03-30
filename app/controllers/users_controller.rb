@@ -1,48 +1,53 @@
 class UsersController < ApplicationController
-    # Use rescue_from to handle ActiveRecord::RecordNotFound exception
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  
-    # Skip authorize method before create and show actions
     skip_before_action :authorize, only: [:create, :show]
-  
-    # Remove format from wrapped parameters
     wrap_parameters format: []
-  
+    
     def index
-      # Render all users in JSON format
-      render json: User.all
+        render json: User.all
     end
-  
+
+
     def show
-      # Find the user by session ID
-      @user = User.find_by(id: session[:user_id])
-  
-      # Render the user in JSON format
-      render json: @user
+        @user = User.find_by(id: session[:user_id])
+        render json: @user
     end
-  
-    def create
-      # Create a new user with permitted parameters
-      new_user = User.create!(new_user_params)
-  
-      # Check if the new user is valid and render a JSON response
-      if new_user.valid?
-        render json: new_user, status: :created
+
+    # def show
+    #     user = User.find_by(id: session[:user_id])
+    #     if user
+    #         render json: user
+    #     else
+    #         render json: { error: "Not authorized" }, status: :unauthorized
+    #     end
+    # end
+
+   def create
+      user = User.create!(permitted_params)
+      if user.valid?
+        session[:user_id] = user.id
+        render json: user, serializer: UserSerializer, status: :created
       else
-        render json: { errors: new_user.errors.full_messages }, status: :unprocessable_entity
+        render json: { error: "not valid data" }, status: :unprocessable_entity
       end
     end
-  
+
+    def destroy
+        user = User.find(params[:id])
+        head :no_content
+    end
+
     private
-  
-    # Define permitted parameters for creating a new user
-    def new_user_params
-      params.permit(:first_name, :last_name, :email, :gender, :age, :password, :password_confirmation)
+
+    def permitted_params
+        params.permit(:first_name, :last_name, :email, :password)
     end
-  
-    # Define record not found error handling method
+
     def record_not_found
-      render json: { errors: ['User not found'] }, status: :not_found
+        render json: { errors: ['User not found'] }, status: :not_found
     end
-  end
-  
+
+    # def authorize
+    #     return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    # end
+end

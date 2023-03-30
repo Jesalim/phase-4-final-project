@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_195711) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_115833) do
   create_table "flights", force: :cascade do |t|
     t.string "destination"
     t.string "departure"
     t.date "flight_date"
     t.date "return_date"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_195711) do
     t.string "email"
     t.string "gender"
     t.integer "age"
-    t.integer "password_digest"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
