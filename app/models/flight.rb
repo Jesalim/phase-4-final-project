@@ -5,4 +5,5 @@ class Flight < ApplicationRecord
     validates :departure, presence: true
     validates :flight_date, presence: true
     # validates :user_id, presence: true
+
 end
