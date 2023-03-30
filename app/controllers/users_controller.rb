@@ -3,6 +3,11 @@ class UsersController < ApplicationController
     skip_before_action :authorize, only: [:create, :show]
     wrap_parameters format: []
     
+
+    # def new
+    #     @user = User.new
+    #   end
+
     def index
         render json: User.all
     end

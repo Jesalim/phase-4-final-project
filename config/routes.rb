@@ -15,8 +15,17 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/user/:id', to: 'users#destroy'
   delete '/logout', to: 'sessions#destroy'
+  post '/booking', to: 'bookings#create'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+# resources :bookings, only: [:create, :index, :edit, :update, :destroy] do
+#     collection do
+#       get :manage
+#       get :search
+#       get "/:booking_id/checkout" => "bookings#checkout", as: :checkout
+#       get "/:booking_id/payment" => "bookings#payment", as: :payment
+#       get "/:booking_id/confirmation" => "bookings#confirmation",
+#           as: :confirmation
+#     end
+#   end
 end
