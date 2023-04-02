@@ -20,7 +20,7 @@ skip_before_action :admin_authorize, only: [:index]
     end
 end
 
-    def admin
+    def update_admin
         admin = Admin.find_by(id: params[:id])
         if admin
             admin.update(admin_params)
@@ -33,6 +33,9 @@ end
     def destroy
         admin = Admin.find(admin_params[:id])
         admin.destroy
+    else
+        render json: { message: "admin not found" }, status: :unprocessable_entity
+      end
     end 
 
     private
