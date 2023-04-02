@@ -11,12 +11,12 @@ gem "byebug"
 gem "rails", "~> 7.0.4"
 
 # Use sqlite3 as the database for Active Record in development and test environments
-gem 'sqlite3', '~> 1.4.2', '>= 1.4.2.2'
+# gem 'sqlite3', '~> 1.4.2', '>= 1.4.2.2'
 
-group :production do
+# group :production do
   # Use PostgreSQL as the database for Active Record in production
   gem 'pg', '>= 1.2', '< 2.0'
-end
+# end
 
 
 
