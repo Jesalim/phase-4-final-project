@@ -1,40 +1,43 @@
 class UsersController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-    skip_before_action :authorize, only: [:create, :show]
-    wrap_parameters format: []
+    # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    before_action :admin_authorize
+    skip_before_action :admin_authorize, only: [:user, :user_register, :show, :destroy]
     
+    #shows all users
     def index
-        render json: User.all
+        users = User.all
+        render json: users, status:ok
     end
 
-
-    def show
-        @user = User.find_by(id: session[:user_id])
-        render json: @user
+    #shows the logged in user
+    def user
+        user = User.find_by(id: session[:uid])
+        if user
+            render json: user, status: :ok
+        else
+            render json: {message: "User not found"}, status: :unprocessable_entity
+        end
     end
 
-    # def show
-    #     user = User.find_by(id: session[:user_id])
-    #     if user
-    #         render json: user
-    #     else
-    #         render json: { error: "Not authorized" }, status: :unauthorized
-    #     end
-    # end
-
-   def create
-      user = User.create!(permitted_params)
-      if user.valid?
-        session[:user_id] = user.id
-        render json: user, serializer: UserSerializer, status: :created
-      else
-        render json: { error: "not valid data" }, status: :unprocessable_entity
-      end
+    def user_register
+        user = User.find_by(id: session[:uid])
+        if user
+            user.update(permitted_params)
+            render json: {data: user, message: "User registered successfully"}          
+    else
+        render json: {message: "Failed"}
     end
+end
 
+    #deletes a user 
     def destroy
         user = User.find(params[:id])
+        if user
+            user.destroy
         head :no_content
+        else
+            render json: {message: "not found"}, status: :not_found
+        end
     end
 
     private
@@ -43,11 +46,21 @@ class UsersController < ApplicationController
         params.permit(:first_name, :last_name, :email, :password)
     end
 
-    def record_not_found
-        render json: { errors: ['User not found'] }, status: :not_found
-    end
-
-    # def authorize
-    #     return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    # def record_not_found
+    #     render json: { errors: ['User not found'] }, status: :not_found
     # end
+
 end
+
+
+###
+
+# def create
+#     user = User.create!(permitted_params)
+#     if user.valid?
+#       session[:user_id] = user.id
+#       render json: user, serializer: UserSerializer, status: :created
+#     else
+#       render json: { error: "not valid data" }, status: :unprocessable_entity
+#     end
+#   end

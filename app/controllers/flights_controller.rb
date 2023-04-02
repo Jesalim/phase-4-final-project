@@ -1,6 +1,7 @@
 class FlightsController < ApplicationController
     wrap_parameters format: []
-     skip_before_action :authorize, only: [ :destroy]
+    before_action :user_authorize
+     skip_before_action :user_authorize, only: [:create, :show, :destroy]
 
     def index
         user = User.find_by(id: session[:user_id])
@@ -23,11 +24,12 @@ class FlightsController < ApplicationController
 
     def create
         
-        new_flight = @current_user.flights.create!(new_flight_params)
+        user = User.find(session[:user_id])
+        new_flight = user.flights.create!(new_flight_params)
         render json: new_flight, status: :created
 
-    rescue ActiveRecord::RecordInvalid => e
-        render json: { error: e.record.errors.full_messages }, status: :unprocessable_entity
+    # rescue ActiveRecord::RecordInvalid => e
+    #     render json: { error: e.record.errors.full_messages }, status: :unprocessable_entity
     end
 
     def update
@@ -47,7 +49,7 @@ class FlightsController < ApplicationController
         params.permit(:destination, :departure, :flight_date, :return_date )
     end
 
-    # def authorize
-    #     return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
-    # end
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    end
 end
