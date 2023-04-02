@@ -5,7 +5,7 @@ skip_before_action :admin_authorize, only: [:index]
 
 
     def index
-        admins = admin.all
+        admins = Admin.all
         render json: admins
     end
 
@@ -31,9 +31,8 @@ end
     end
 
     def destroy
-        admin = Admin.find(admin_params[:id])
+        admin = Admin.find([:id])
         admin.destroy
-    else
         render json: { message: "admin not found" }, status: :unprocessable_entity
       end
     end 
@@ -41,10 +40,14 @@ end
     private
 
     def admin_params
-        params.permit(:id, :username, :email, :password), status: :unauthorized unless session.include? :aid
+        params.permit(:id, :username, :email, :password)
     end
 
-    def render_not_found_response
+    def admin_authorize 
+        render json: { error: "Unauthorized" }, status: :unauthorized unless session.include? :aid
+      end
+    
+      def render_not_found_response
         render json: {error: "Admin not found"}, status: :not_found
+      end
     end
-end
