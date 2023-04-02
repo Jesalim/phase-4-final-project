@@ -12,12 +12,14 @@ class BookingsController < ApplicationController
     end
   
     def create
-      book = Booking.new(booking_params)
-      book.user_id = current_user.id if current_user
+      passenger = User.find(session[:user_id])
+      booking = passenger.bookings.new(booking_params)
+      # book.user_id = current_user.id if current_user
   
-      if book.save
-        book.flight.update(available_seats: book.remaining_seats)
-        redirect_to checkout_bookings_path(booking_id: book.id)
+      if booking.save
+        # booking.flight.update(available_seats: booking.remaining_seats)
+        # redirect_to checkout_bookings_path(booking_id: book.id)
+        render json: booking
       else
         redirect_to :back, alert: "Sorry, your flight was not booked"
       end
@@ -83,8 +85,7 @@ class BookingsController < ApplicationController
   
     def booking_params
       params.require(:booking).permit(
-        :flight_id,
-        passengers_attributes: [:id, :passenger_id, :name, :email, :phone]
-      )
+        :flight_id, :booking_number, :amount, :paid)
     end
+
 end
