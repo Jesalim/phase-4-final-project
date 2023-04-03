@@ -3,6 +3,8 @@ Rails.application.routes.draw do
  
   #shows logged in users
   get '/user', to: "users#user"
+  post 'user/signup', to: 'users#user_register'
+
 
   #logs in an user
   post 'user/login', to: 'sessions#user_login'

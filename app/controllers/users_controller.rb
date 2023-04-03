@@ -46,21 +46,7 @@ end
         params.permit(:first_name, :last_name, :email, :password)
     end
 
-    # def record_not_found
-    #     render json: { errors: ['User not found'] }, status: :not_found
-    # end
 
 end
 
 
-###
-
-# def create
-#     user = User.create!(permitted_params)
-#     if user.valid?
-#       session[:user_id] = user.id
-#       render json: user, serializer: UserSerializer, status: :created
-#     else
-#       render json: { error: "not valid data" }, status: :unprocessable_entity
-#     end
-#   end

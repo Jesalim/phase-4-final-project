@@ -10,6 +10,8 @@ gem "byebug"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
 
+gem 'activesupport'
+
 # Use sqlite3 as the database for Active Record in development and test environments
 # gem 'sqlite3', '~> 1.4.2', '>= 1.4.2.2'
 
