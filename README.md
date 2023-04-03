@@ -62,4 +62,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- CONTACT -->
 ## Contact
-Marylucy Atieno  - [marylucyatienoomenda@gmail.com](email)
+Marylucy Atieno. 
+Kidhri Salim.
+Jessica Gichuru.
+Nicholas Mwaura.
+
