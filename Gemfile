@@ -1,7 +1,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.6"
+ruby "2.7.4"
+
+gem 'pg'
+
 
 gem "bcrypt", "~> 3.1.7"
 
