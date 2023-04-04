@@ -21,6 +21,13 @@ https://github.com/Jesalim/frontend-ph4-project
  * Ruby v3.1.4
  * Ruby on Rails v7.0.4
 
+###Deployment frontend link.
+https://frontend-ph4-project.vercel.app/
+
+
+###Deployment backend link.
+https://airline-app.onrender.com/
+
 <!-- GETTING STARTED -->
 ## Getting Started
 To get a local copy up and running follow these simple example steps.
