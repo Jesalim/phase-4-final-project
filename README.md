@@ -1,24 +1,47 @@
-# README
+# Fight Booking
+A 'mini' Rails application.
+## Explore the repository »
+## About The Project
+Welcome to our flight booking website! With our easy-to-use interface, you can quickly search for available flights, select your preferred travel dates and destinations, and book your flight in just a few clicks. Our website provides real-time information on flight schedules, ticket prices, and available seats from a range of airlines, making it easy to find the best flight deals and plan your trip with ease. We also offer various payment options and support for multiple languages, so you can book your flight from anywhere in the world.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Find Our Front-end Repository. https://github.com/Jesalim/frontend-ph4-project
 
-Things you may want to cover:
+The project was built with:
+Ruby v3.1.4
+Ruby on Rails v7.0.4
+### Deployment frontend link. https://frontend-ph4-project.vercel.app/
 
-* Ruby version
+### Deployment backend link. https://airline-app.onrender.com/
 
-* System dependencies
+## Getting Started
+To get a local copy up and running follow these simple example steps.
 
-* Configuration
+## Prerequisites
+Ruby: 2.7.4 Rails: 7.0.4
 
-* Database creation
+## Setup
+$ git@github.com:https://github.com/Jesalim/phase-4-final-project
+$ cd phase-4-final-project
+Install gems with:
 
-* Database initialization
+bundle install
+Setup database with:
 
-* How to run the test suite
+make sure you have postgresql installed and running on your system
 
-* Services (job queues, cache servers, search engines, etc.)
+   rails db:create
+   rails db:migrate
+   rails db:seed
+Usage
+Start server with:
 
-* Deployment instructions
+    rails server or rails s
+Open http://localhost:3000/ in your browser.
 
-* ...
+## Deployment Link https://project-c92s.onrender.com/
+
+## License
+Distributed under the MIT License. See LICENSE.txt for more information.
+
+## Team
+Marylucy Atieno. Kidhri Salim. Jessica Gichuru. Nicholas Mwaura.
